@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Veloo NE Optimizer – Premium</title>
+<style>
+  @keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+
+  @keyframes pulse {
+    0% { box-shadow: 0 0 10px #a060ff; }
+    50% { box-shadow: 0 0 25px #c080ff; }
+    100% { box-shadow: 0 0 10px #a060ff; }
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(circle at top, #1a002b, #000);
+    color: white;
+    overflow: hidden;
+    animation: fadeIn 1.2s ease-in-out;
+  }
+
+  .header {
+    text-align: center;
+    padding: 25px;
+    font-size: 26px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #b57aff;
+    text-shadow: 0 0 15px #b57aff, 0 0 25px #7000ff;
+    animation: pulse 3s infinite;
+  }
+
+  .panel {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .button {
+    background: linear-gradient(135deg, #4b008a, #8000ff);
+    border: 2px solid #a060ff;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 16px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 0 20px #6000ff;
+    transition: transform 0.2s, box-shadow 0.3s, background 0.4s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -75px;
+    width: 50px;
+    height: 100%;
+    background: rgba(255,255,255,0.3);
+    transform: skewX(-20deg);
+    transition: left 0.5s;
+  }
+
+  .button:hover::after {
+    left: 120%;
+  }
+
+  .button:hover {
+    transform: scale(1.07);
+    background: linear-gradient(135deg, #6a00d4, #b060ff);
+    box-shadow: 0 0 35px #b57aff;
+  }
+
+  .log {
+    margin: 30px auto;
+    width: 90%;
+    max-width: 500px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 10px;
+    padding: 10px 15px;
+    height: 200px;
+    overflow-y: auto;
+    font-size: 14px;
+    line-height: 1.6;
+    box-shadow: inset 0 0 15px rgba(176,96,255,0.2);
+  }
+
+  .progress-container {
+    width: 90%;
+    max-width: 500px;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    height: 10px;
+  }
+
+  .progress-bar {
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #8a2fff, #ff00ff);
+    border-radius: 10px;
+    transition: width 0.15s;
+  }
+
+  .footer {
+    text-align: center;
+    color: #aaa;
+    font-size: 12px;
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">⚡ Veloo NE Optimizer ⚡</div>
+
+<div class="panel">
+  <button class="button" onclick="optimize('DPI', '450')">🖥 Set DPI 450</button>
+  <button class="button" onclick="optimize('Animasi', '0.5x')">🎞 Scale Anim 0.5</button>
+  <button class="button" onclick="optimize('Cache', 'Dihapus')">🧹 Bersihkan Cache</button>
+  <button class="button" onclick="optimize('Buffer', '64KB')">💾 Buffer 64KB</button>
+</div>
+
+<div class="log" id="log">
+  <b>[Veloo NE Console]</b><br>
+</div>
+
+<div class="progress-container">
+  <div class="progress-bar" id="progress"></div>
+</div>
+
+<div class="footer">Made with 💜 by <b>Veloo NE</b></div>
+
+<script>
+  // Suara klik efek
+  const clickSound = new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_8bcb4bff49.mp3?filename=button-click-141882.mp3");
+
+  function optimize(type, value) {
+    const log = document.getElementById('log');
+    const progress = document.getElementById('progress');
+    let percent = 0;
+
+    clickSound.currentTime = 0;
+    clickSound.play();
+
+    log.innerHTML += `<span style='color:#b57aff;'>> Mengatur ${type}...</span><br>`;
+    const interval = setInterval(() => {
+      percent += 10;
+      progress.style.width = percent + "%";
+      if (percent >= 100) {
+        clearInterval(interval);
+        log.innerHTML += `<span style='color:#0f0;'>✔ ${type} berhasil diatur ke ${value}</span><br>`;
+        progress.style.width = "0%";
+        log.scrollTop = log.scrollHeight;
+      }
+    }, 120);
+  }
+</script>
+
+</body>
+</html>
